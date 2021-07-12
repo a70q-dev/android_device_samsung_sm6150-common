@@ -62,4 +62,38 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1048576000
 
 TARGET_COPY_OUT_VENDOR := vendor
 
+# Recovery
+BOARD_HAS_DOWNLOAD_MODE := true
+BOARD_INCLUDE_RECOVERY_DTBO := true
+TARGET_NO_RECOVERY := false
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USES_MKE2FS := true
+
+# Root
+TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
+
+BOARD_ROOT_EXTRA_FOLDERS := \
+    carrier \
+    dqmdbg \
+    efs \
+    keydata \
+    keyrefuge \
+    metadata \
+    omr \
+    optics \
+    prism \
+    spu \
+
+# SELinux
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
+    device/samsung_slsi/sepolicy/common/private \
+    $(COMMON_PATH)/sepolicy/private
+
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR += \
+    device/samsung_slsi/sepolicy/common/public
+
+BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
+
 include vendor/samsung/sm6150-common/BoardConfigVendor.mk
